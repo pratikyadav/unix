@@ -4,6 +4,10 @@ Tools and patterns for shell driven development
 Tools
 -----
 
+### Terminal
+
+### Staples
+
 - bash
   - [Bash programming how-to](http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc)
   - [BashGuide](http://mywiki.wooledge.org/BashGuide)
@@ -18,18 +22,38 @@ Tools
   - [Defensive Bash programming](http://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/)
 - find
 - awk
+  - [Why you should know a little awk](http://gregable.com/2010/09/why-you-should-know-just-little-awk.html)
+  - [Steve's Awk Academy](http://www.troubleshooters.com/codecorn/awk/index.htm)
+  - [Awk is a beautiful tool](http://www.eriwen.com/tools/awk-is-a-beautiful-tool/)
+  - [Grymoire's guide to awk](http://www.grymoire.com/Unix/Awk.html)
 - ag
 - make
+  - [manpage](https://www.gnu.org/software/make/manual/make.html#Top)
+  - [make for data](http://mojodna.net/2015/01/07/make-for-data-using-make.html)
 - aws
   - `s3api` commands are driven entirely by JSON models, and map in a 1-1 fashion to service API's.
   - `s3` commands are built on top of `s3api` commands, and **do not** map directly to service API's.
   - use `--dryrun` first.
 - [jq](https://github.com/stedolan/jq)
 - [parallel](https://www.gnu.org/software/parallel/)
-- vmd
-- geojsonio
+- xargs
+
+
+### Geospatial
+
+- Fio
+- Rio
+- Mercantile
+- Landsat-util
+- Geojsonio-cli
 - geojson-merge
-- youtube-dl
+- geojson-summary
+
+### Extra's
+
+- [vmd](https://github.com/yoshuawuyts/vmd)
+- [youtube-dl](https://github.com/rg3/youtube-dl)
+
 
 Patterns
 --------
