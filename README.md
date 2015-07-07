@@ -1,5 +1,13 @@
 # unix
-Tools and patterns for shell driven development
+Tools and patterns for shell driven development. [Start here](http://substack.net/many_things), and then [here](https://vimeo.com/56219478)
+
+> We need to be better about how to go from problem A to solution B by way of modules X, Y, and Z.
+
+and
+
+> There should be more public discussion about what modules to use for which problems and when.
+
+In addition to creating UNIXy tools for atomic processes, can the same patterns by scaled to larger concepts. IE, can we go from `cat | grep | wc` to `aws | docker | something-else`?
 
 Tools
 -----
