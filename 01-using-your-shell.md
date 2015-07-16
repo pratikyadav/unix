@@ -1,28 +1,13 @@
 Using your shell
-----------------
+================
 
-### Basic commands
+Basics
+-------
 
-cd, ls, mv, rm, cat, pwd
-
-
-### Special characters
-
-Special characters have non-literal meanings when evaluated by bash.
-
-- `$` introduces various methods of expansion.
-- `''` protect the text within them. Any sort of interpretation is ignored, no substitutions are allowed.
-- `""` act similarly to single quotes, but allow for substitution.
-- `\\` acts as an escape, and prevents the next character from being evaluated as special.
-- `!` is used to negate or reverse a test or status
-- `><` redirection.
-- `;` separates commands - an alternative to a newline.
-- `[[]]` are tests, and are used to evaluate conditional expressions
-- `{}` inline groups cause the commands within to be treated as if they were one command.
-- `()` subshell groups cause the commands within to be executed within a subshell, and can be used as a sandbox.
+`cd`, `ls`, `mv`, `rm`, `cat`, `pwd`
 
 
-### Parameters
+### Variables and Parameters
 
 **Parameters** are a means of storing information in memory. **Variables** are a subset of parameters which can be assigned and updated by the user.
 
@@ -34,17 +19,6 @@ echo "Foo is $foo"
 Put double quotes around every parameter expansion so that it's always taken as a singular option, and won't inadvertently get taken as a series of options due to parameter expansion.
 
 
-### Special parameters
-
-- `$0` contains the path of the script being run.
-- `$1` are positional parameters that contain the arguments passed in.
-- `$*` contains all the words from all the parameters
-- `$@` expands to all the words of all the positional parameters. When double quoted, it expands to a list of them as individual words.
-- `$#` expands to the number of positional args that are set
-- `$!` expands to the pid of the command most recently executed in the background
-- `$_` expands to the last argument of the last command executed
-
-
 ### Expansion
 
 Refers to any operation that causes a parameter to be expanded.
@@ -53,7 +27,42 @@ Refers to any operation that causes a parameter to be expanded.
 - `${parameter:=word}` assigns a default value. If `parameter` in unset, it is set to `word`.
 
 
-### Flow control
+Flow control
+------------
+
+
+### Arrays
+
+Whitespace-separated substrings are often sufficient.
+
+    list="1 2 3"
+    for x in $list; do
+        echo $x;
+    done
+
+    > 1
+    > 2
+    > 3
+
+True array objects are more powerful, and allow access to particular members within the list.
+
+    list=(1 2 3)
+    for x in ${list[@]}; do
+        echo $x       
+    done
+
+    > 1
+    > 2
+    > 3
+
+A secondary  benefit of arrays is the ability to comment. This is particularly useful for environmental setups, where it can be useful to document why certain dependencies are being installed.
+
+    apt_pkgs=(
+        rasterio    # required for rio commands
+        jq          # required for json parsing
+    )
+    sudo apt-get install ${apt_pkgs[@]}
+
 
 #### For loops
 

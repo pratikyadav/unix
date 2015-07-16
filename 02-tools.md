@@ -6,6 +6,15 @@ Tools
 Standard
 --------
 
+#### open (Mac only)
+
+Open files with the whatever program is registered to open that filetype. IE:
+
+    open .
+    open file.pdf
+    open http://mapbox.com
+
+
 #### find
 
 #### awk
@@ -23,9 +32,46 @@ Swap columns in a csv:
     
 #### ag
 
+#### sed
+
+`sed` is short for `Stream EDit`, and is used for substituting parts of text identified via regex for others.
+
+To replace all instances of `foo` with `bar`:
+
+    cat file.txt | sed 's/foo/bar'
+
+
 #### grep
 
+Grep is used for finding particular matches within a file.
+
+To see the lines containing the word `function`:
+
+    cat file.sh | grep function
+    OR
+    grep 'function' file.sh
+
+
 #### history
+
+Via previously run commands with `history`
+
+    3028  j unix
+    3030  v README.md
+    3032  v 03-scripting.md
+    3033  man bc
+    3035  v 01-using-your-shell.md
+    3037  touch 04-vim.md
+
+Paired with `grep`, this can be useful for finding lengthy commands you can't quite remember.
+
+    history -n 100 | grep pxm
+
+    g commit -m 'added documentation for pxm-islossy'
+    g push origin document-pxm-islossy
+    g checkout -b document-pxm-fetch
+    ./pxm-fetch
+
 
 #### cut
 
@@ -35,7 +81,21 @@ Grab the first `n` characters from a file with `cut -c-n input`
 
 #### [parallel](https://www.gnu.org/software/parallel/)
 
+#### pbcopy/pbpaste (Mac only)
+
+You can copy the contents of files to your clipboard using `pbcopy`
+
+    cat ~/.aws/credentials | pbcopy
+
+
 #### xargs
+
+`xargs` can be used to run processes in parallel. It's a lighter-weight alternative to `parallel`, and is typically installed by default.
+
+    xargs -n 1 -P 4 process.sh < list.txt
+
+Here, `xargs` gives `process.sh` script arguments from `list.txt` one at a time via `-n 1`, but runs 4 of them concurrently via `-P 4`.
+
 
 #### make
 

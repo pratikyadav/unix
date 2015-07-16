@@ -3,22 +3,18 @@ unix
 
 **This repo describes tools, patterns, and workflows that make interaction with your computer more efficient.**
 
-Almost every computer you'll interact with these days will be able to natively 'speak' with the UNIX utilities and bash workflows described here. It's the lingua franca of computers - understanding how to speak it will make your life better :)
+Almost every computer you'll interact with will be able to natively 'speak' with the UNIX utilities and bash workflows described here. It's the lingua franca of computers - understanding how to speak it will make your life better :)
 
-@substack has done [a beautiful job](http://substack.net/many_things) describing why unix-flavored development is so powerful.
 
-The first set of iterations will focus on small-scale, atomic tools. Later, we'll try to expand the same patterns to larger scales.
+Table of contents
+-----------------
 
-### Table of contents
-
-1. Using your shell
-2. Tools
-  - Standard
-  - Geospatial
-  - Extras
-    - [vmd](https://github.com/yoshuawuyts/vmd)
-    - [youtube-dl](https://github.com/rg3/youtube-dl)
-3. Scripting
+1. [Using your shell](https://github.com/jacquestardie/unix/blob/master/01-using-your-shell.md)
+2. [Tools](https://github.com/jacquestardie/unix/blob/master/02-tools.md)
+  - [Standard](https://github.com/jacquestardie/unix/blob/master/02-tools.md#standard)
+  - [Geospatial](https://github.com/jacquestardie/unix/blob/master/02-tools.md#geospatial)
+  - [Extras](https://github.com/jacquestardie/unix/blob/master/02-tools.md#extras)
+3. [Scripting](https://github.com/jacquestardie/unix/blob/master/03-scripting.md)
 
 
 See Also

@@ -2,6 +2,11 @@
 
 Bash scripts are essentially linear sequences of commands in a file. Bash reads the file and processes in order, moving on to the next only when execution of the current has ended.
 
+#### Starting fresh
+
+
+##### Hashbangs
+
 New scripts should begin with:
 
     #!/usr/bin/env/bash
@@ -10,30 +15,65 @@ That line is called a `hashbang`, and ensure that when the script is run, bash i
 
 The hashbang is not the same as `/bin/sh`, which should be avoided. Additionally, do not add the `.sh` suffix, as it serves no purpose, and is misleading in general(?)
 
+
+##### Giving your script executable permissions
+
 Scripts can be given executable permissions, so that we can call the script itself, rather than as an argument to `bash`.
 
     chmod +x <script>
     ./<script>
     
 
-### Best Practices
+##### Catch errors early
 
-Shell scripts are usually full of subtle effects which result in unique, often unexpected crashes. Writing defensively will protect against some of those crashes.
+Shell scripts are usually full of subtle effects which result in unique, often unexpected crashes. Writing defensively will protect against some of those crashes. Add the following to the top of every script you write:
 
-Appending `set -u` towards the top of your script will cause the script to fail if one of the referenced variables is not set. For example:
+    set -eu
+
+`set -u` script will cause the script to fail if one of the referenced variables is not set. For example:
 
     cd $dir
     rm *
 
 In this case, if $dir is not set, rm * will destroy the entire directory.
 
-In addition, `set -e` should be included with every script. It lets bash know that the script should exit in the event that any statement returns a non-true return value. By failing early, you're less likely to accumulate larger, more destructive errors.
+`set -e` lets bash know that the script should exit in the event that any statement returns a non-true return value. By failing early, you're less likely to accumulate larger, more destructive errors.
+
 
 Finally, `set -o pipefail` will cause the script to fail in the event that any portion of a pipe fails. For instance, without `pipefail`, the following will not cause an error:
 
     true | false
 
-**Quote around variables** to protect against filenames or command line arguments that use spaces.
+If you need to run commands that you expect *should* fail, catch and handle them with the `&&` and `||` operators.
+
+    wget http://example.com/foo $$ echo "success" || echo "failure"
+
+
+##### Fallback values
+
+Variables can be set with default values using the following syntax:
+
+    # Set the working directory to the $TEMP global variable,
+    # or to /tmp if $TEMP is undeclared.
+    workdir=${TEMP:~/tmp}
+
+
+## Special characters
+
+Special characters have non-literal meanings when evaluated by bash.
+
+- `$` introduces various methods of expansion.
+- `''` protect the text within them. Any sort of interpretation is ignored, no substitutions are allowed.
+- `""` act similarly to single quotes, but allow for substitution.
+- `\\` acts as an escape, and prevents the next character from being evaluated as special.
+- `!` is used to negate or reverse a test or status
+- `><` redirection.
+- `;` separates commands - an alternative to a newline.
+- `[[]]` are tests, and are used to evaluate conditional expressions
+- `{}` inline groups cause the commands within to be treated as if they were one command.
+- `()` subshell groups cause the commands within to be executed within a subshell, and can be used as a sandbox.
+
+
 
 ### Shell functions
 
