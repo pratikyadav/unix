@@ -58,6 +58,20 @@ Variables can be set with default values using the following syntax:
     workdir=${TEMP:~/tmp}
 
 
+## Special variables
+
+| var  | description |
+| :--- | :---------- |
+| `$0` | positional, refers to the name of the script run |
+| `$1` | positional, refers to the 1st argument |
+| `$@` | an array of all positional args from 1 on |
+| `$#` | the number of positional params |
+| `$-` | current options set for the shell |
+| `$$` | pid of the current shell |
+| `$?` | the most recent exit status |
+| `$!` | the pid of the most recent background command |
+
+
 ## Special characters
 
 Special characters have non-literal meanings when evaluated by bash.
