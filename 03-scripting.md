@@ -111,6 +111,8 @@ Any advanced logic will require tests and conditionals.
 
 Every command results in an exit code when it terminates. `0` denotes success, and any other number denotes failure. The specific number used can be used as a hint at what exactly happened. Failure values can range from 1-255.
 
+**[Learn more about why you should use exit codes](http://bencane.com/2014/09/02/understanding-exit-codes-and-how-to-use-them-in-bash-scripts/)**
+
 ### Control operators
 
 - `&&` represents logical AND
