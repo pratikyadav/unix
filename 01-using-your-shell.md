@@ -66,17 +66,17 @@ A secondary  benefit of arrays is the ability to comment. This is particularly u
 
 #### For loops
 
-for file in $files; do
-echo $file
-done
+    for file in $files; do
+        echo $file
+    done
 
 #### While loops
 
 Iterate through each line in a file.
 
-while read line; do
-echo $line
-done < input
+    while read line; do
+        echo $line
+    done < input
 
 Patterns
 --------
