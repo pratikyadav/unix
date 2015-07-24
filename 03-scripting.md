@@ -1,11 +1,14 @@
-### bash
+bash
+====
+
 
 Bash scripts are essentially linear sequences of commands in a file. Bash reads the file and processes in order, moving on to the next only when execution of the current has ended.
 
-#### Starting fresh
 
+Starting fresh
+--------------
 
-##### Hashbangs
+### Hashbangs
 
 New scripts should begin with:
 
@@ -16,7 +19,7 @@ That line is called a `hashbang`, and ensure that when the script is run, bash i
 The hashbang is not the same as `/bin/sh`, which should be avoided. Additionally, do not add the `.sh` suffix, as it serves no purpose, and is misleading in general(?)
 
 
-##### Giving your script executable permissions
+### Giving your script permission to run
 
 Scripts can be given executable permissions, so that we can call the script itself, rather than as an argument to `bash`.
 
@@ -24,7 +27,7 @@ Scripts can be given executable permissions, so that we can call the script itse
     ./<script>
     
 
-##### Catch errors early
+### Catch errors early
 
 Shell scripts are usually full of subtle effects which result in unique, often unexpected crashes. Writing defensively will protect against some of those crashes. Add the following to the top of every script you write:
 
@@ -49,7 +52,7 @@ If you need to run commands that you expect *should* fail, catch and handle them
     wget http://example.com/foo $$ echo "success" || echo "failure"
 
 
-##### Fallback values
+### Fallback values
 
 Variables can be set with default values using the following syntax:
 
@@ -58,7 +61,9 @@ Variables can be set with default values using the following syntax:
     workdir=${TEMP:~/tmp}
 
 
-## Special variables
+Special variables
+-----------------
+
 
 | var  | description |
 | :--- | :---------- |
@@ -72,7 +77,7 @@ Variables can be set with default values using the following syntax:
 | `$!` | the pid of the most recent background command |
 
 
-## Special characters
+### Special characters
 
 Special characters have non-literal meanings when evaluated by bash.
 
@@ -89,32 +94,55 @@ Special characters have non-literal meanings when evaluated by bash.
 
 
 
-### Shell functions
+Functions
+---------
 
-Shell functions act as small programs within your program. They take the form of:
+Shell functions act as small programs within your program. They take two forms:
 
-    function_name() {
+    function foo {
+      // body
+    }
+    
+Or,
+
+    bar() {
       // body
     }
 
 Functions are not hoisted, and must be defined before you try to use them. Functions must contain a passable command within them. While developing your script's, it's often useful to stub out functions using `echo`.
 
-### Flow control
+Functions use the same `$` prefix variables that were mentioned earlier.
 
-#### If
+    function argument {
+        value=$1
+        echo "This is the argument: $value"
+    }
+    
+    argument "Hi"
+    
+### Local variables
 
-`If` makes a decision based on the *exit status* of a command. The syntax appears as follows:
+Appending the `local` keyword before defining a variable changes the scope such that it applies only to the function itself, rather than the global scope.
 
-    if commands; then
-      // commands
-    elif commands; then
-      // commands
-    else
-      //commands
-    fi
+    important=100
+    
+    function wont_affect_globals {
+        local important=0
+    }
+    
+    wont_affect_globals
+    
+    echo $important # 100
+    
+### Chaining
 
-In the case that a command exits successfully with a status of `0`, then the if statement will run, otherwise, the `else` clause is triggered.
+Functions behave just like bash commands, so you can used `&&` to run multiple commands in sequence.
 
+Alternatively, the `||` operator will run as an if/else statement in case of failure.
+
+    wont_run || will_run
+    
+    
 Tests and conditionals
 ----------------------
 
