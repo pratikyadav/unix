@@ -6,6 +6,14 @@ Basics
 
 `cd`, `ls`, `mv`, `rm`, `cat`, `pwd`
 
+### `echo`
+
+`echo` prints the a string or the contents of a variable. Pay special attention to quoting when using `echo`.
+
+For a line-delimited array, `echo $array` is equivalent to `echo ${array[0]} ${array[1]} ...`. Using `echo "$array"` (not the quotes), is equivalent to `echo $array` where `$array` is a single unit (as opposed to a series of values).
+
+This can come up when using a command like `parallel`. `/usr/bin/parallel: Argument list too long` is a great hint :).
+
 
 ### Variables and Parameters
 
