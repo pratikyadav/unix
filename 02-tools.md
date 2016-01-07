@@ -81,6 +81,43 @@ Grab the first `n` characters from a file with `cut -c-n input`
 
 #### [parallel](https://www.gnu.org/software/parallel/)
 
+Parallel is usually a faster alternative to `while` and `for` loops. Replace this `for` loop:
+
+```bash
+for file in $(cat files.log); do
+    src="s3://$source"
+    dst="s3://$destination"
+
+    if aws s3 ls $dst/$file &> /dev/null; then
+        echo "ok - $dst/$file noop"
+    else
+        aws s3 cp --quiet $src/$file $dst/$file
+        echo "ok - $dst/$file copy"
+    fi
+done
+```
+
+With a shell function and `parallel`:
+
+```bash
+files=$(cat files.log)
+
+move() {
+    file=$1
+    src="s3://$source"
+    dst="s3://$destination"
+
+    if aws s3 ls $dst/$file &> /dev/null; then
+        echo "ok - $dst/$file noop"
+    else
+        echo "ok - $dst/$file copy"
+        aws s3 cp --quiet $src/$file $dst/$file
+    fi
+}; export -f move
+
+echo "$files" | parallel -j8 "bucket=$bucket move {}"
+```
+
 #### pbcopy/pbpaste (Mac only)
 
 You can copy the contents of files to your clipboard using `pbcopy`
