@@ -118,6 +118,24 @@ move() {
 echo "$files" | parallel -j8 "bucket=$bucket move {}"
 ```
 
+When working large lists, you'll frequently see an error like:
+
+```bash
+/usr/bin/parallel: Argument list too long
+```
+
+In most cases, I cause this by using the following pattern:
+```bash
+files=$(cat /tmp/sources/$source ' 
+...
+parallel function {}" ::: $files
+```
+
+The fix is to replace ^ with:
+```bash
+cat /tmp/sources/$source | parallel function {}"
+```
+
 #### pbcopy/pbpaste (Mac only)
 
 You can copy the contents of files to your clipboard using `pbcopy`
